@@ -14,6 +14,7 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: false }));
 
 // Database connection
 mongoose.connect(process.env.DATABASE_URL, {
@@ -24,10 +25,13 @@ mongoose.connect(process.env.DATABASE_URL, {
 const db = mongoose.connection;
 
 db.on('error', error => console.error(error));
-db.once('open', () => console.log('Connected to mongoose'));
+db.once('open', () => console.log('Connected to Mongoose'));
 
 // Routes
 app.use('/', require('./routes/index'));
+
+// Author routes
+app.use('/authors', require('./routes/authors'));
 
 // Port
 const port = process.env.PORT || 3000;
