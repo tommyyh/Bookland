@@ -28,10 +28,9 @@ db.on('error', error => console.error(error));
 db.once('open', () => console.log('Connected to Mongoose'));
 
 // Routes
-app.use('/', require('./routes/index'));
-
-// Author routes
-app.use('/authors', require('./routes/authors'));
+app.use('/', require('./routes/index')); // Home routes
+app.use('/authors', require('./routes/authors')); // Author routes
+app.use('/books', require('./routes/books')); // Book routes
 
 // Port
 const port = process.env.PORT || 3000;
